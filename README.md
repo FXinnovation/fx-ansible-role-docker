@@ -23,9 +23,11 @@ N/A
 Example Playbook
 ----------------
 
-TODO
-
 ```yaml
+  tasks:
+  - name: 'Install Docker Engine'
+    include_role:
+      name: 'ansible-role-docker'
 ```
 
 License

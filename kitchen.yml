@@ -3,16 +3,16 @@
 driver:
   name: "ec2"
   associate_public_ip: true
-  aws_ssh_key_id: "<%= ENV['AWS_SSH_KEY_ID'] %>"
+  aws_ssh_key_id: "fxlab_jenkins"
   interface: "public"
-  region: "<%= ENV['AWS_REGION'] %>"
+  region: "us-east-1"
   require_chef_omnibus: false
-  subnet_id: "<%= ENV['AWS_SUBNETID'] %>"
-  iam_profile_name: "<%= ENV['AWS_IAMPROFILE'] %>"
+  subnet_id: "subnet-cd28dca9"
+  iam_profile_name: "AmazonEC2ReadOnlyAccess"
 
 transport:
   name: "ssh"
-  ssh_key: "<%= ENV['AWS_SSH_KEY'] %>"
+  ssh_key: "/id_rsa.pem"
   username: "ec2-user"
   connection_retries: 5
   connection_retry_sleep: 30
@@ -27,11 +27,11 @@ provisioner:
   ansible_verbose: false
   ansible_verbosity: 2
   require_pip: true
-  ansible_version: "<%= ENV['KITCHEN_ANSIBLE_VERSION'] %>"
-  idempotency_test: <%= ENV['KITCHEN_IDEMPOTENCY'] %>
+  ansible_version: "2.7.10"
+  idempotency_test: true
   require_chef_for_busser: false
   require_ruby_for_busser: false
-  role_name: "<%= ENV['KITCHEN_ROLENAME'] %>"
+  role_name: "ansible-role-docker"
   roles_path: "."
 
 platforms:
@@ -39,7 +39,7 @@ platforms:
     driver:
       instance_type: "t3.small"
       tags:
-        Name: "tk-<%= ENV['KITCHEN_ROLENAME'] %>"
+        Name: "tk-ansible-role-docker"
         kitchen: "true"
         packer: "true"
   - name: "centos-7"
@@ -50,7 +50,7 @@ platforms:
         product-code: "aw0evgkw8e5c1q413zgy5pjce"
       instance_type: "t3.small"
       tags:
-        Name: "tk-<%= ENV['KITCHEN_ROLENAME'] %>"
+        Name: "tk-ansible-role-docker"
         kitchen: "true"
         packer: "true"
     transport:
@@ -59,7 +59,7 @@ platforms:
     driver:
       instance_type: "t3.small"
       tags:
-        Name: "tk-<%= ENV['KITCHEN_ROLENAME'] %>"
+        Name: "tk-ansible-role-docker"
         kitchen: "true"
         packer: "true"
 

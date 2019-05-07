@@ -71,11 +71,40 @@ verifier:
     - junit:%{platform}_%{suite}_inspec.xml
 
 suites:
-  - name: "default"
+  - name: "rhel"
+    includes:
+      - "rhel-7"
     provisioner:
       name: "ansible_playbook"
       playbook: "tests/test.yml"
     verifier:
       inspec_tests:
         - name: local
-          path: test/integration/default
+          path: test/integration/default/main.rb
+        - name: local
+          path: test/integration/default/rhel.rb
+  - name: "centos"
+    includes:
+      - "centos-7"
+    provisioner:
+      name: "ansible_playbook"
+      playbook: "tests/test.yml"
+    verifier:
+      inspec_tests:
+        - name: local
+          path: test/integration/default/main.rb
+        - name: local
+          path: test/integration/default/centos.rb
+  - name: "amazon"
+    includes:
+      - "amazon2-2019"
+    provisioner:
+      name: "ansible_playbook"
+      playbook: "tests/test.yml"
+    verifier:
+      inspec_tests:
+        - name: local
+          path: test/integration/default/main.rb
+        - name: local
+          path: test/integration/default/amazon.rb
+

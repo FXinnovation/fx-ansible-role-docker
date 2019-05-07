@@ -80,8 +80,6 @@ suites:
     verifier:
       inspec_tests:
         - name: local
-          path: test/integration/default/main.rb
-        - name: local
           path: test/integration/default/rhel.rb
   - name: "centos"
     includes:
@@ -92,8 +90,6 @@ suites:
     verifier:
       inspec_tests:
         - name: local
-          path: test/integration/default/main.rb
-        - name: local
           path: test/integration/default/centos.rb
   - name: "amazon"
     includes:
@@ -103,8 +99,6 @@ suites:
       playbook: "tests/test.yml"
     verifier:
       inspec_tests:
-        - name: local
-          path: test/integration/default/main.rb
         - name: local
           path: test/integration/default/amazon.rb
 

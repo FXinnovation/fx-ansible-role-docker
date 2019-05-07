@@ -9,7 +9,7 @@
 
 - name: Add Docker GPG key.
   rpm_key:
-    key:   docker_centos_gpg
+    key:   /docker_centos_gpg
     state: present
 
 - name: Add Docker repository.

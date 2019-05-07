@@ -3,4 +3,4 @@
   package:
     name: "docker"
     state: "present"
-  notify: restart docker
+  notify: "restart docker"

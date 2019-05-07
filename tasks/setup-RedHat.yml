@@ -7,9 +7,16 @@
       - docker-engine
     state: absent
 
+- name: Copy Docker GPG key
+  copy:
+    src:   docker_centos_gpg
+    dest:  /tmp/docker_centos_gpg
+    owner: root
+    group: root
+
 - name: Add Docker GPG key.
   rpm_key:
-    key:   /docker_centos_gpg
+    key:   /tmp/docker_centos_gpg
     state: present
 
 - name: Add Docker repository.

@@ -1,0 +1,34 @@
+---
+
+- name: Ensure dependencies are installed.
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+    state: present
+
+- name: Copy Docker GPG key
+  copy:
+    src:   docker_centos_gpg
+    dest:  /tmp/docker_debian_gpg
+    owner: root
+    group: root
+
+- name: Add Docker apt key.
+  apt_key:
+    url:   /tmp/docker_debian_gpg
+    id:    9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+  register: add_repository_key
+
+- name: Add Docker repository.
+  apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+    update_cache: true
+
+- name: Install Docker.
+  package:
+    name: "{{ docker_package }}"
+    state: "{{ docker_package_state }}"
+  notify: restart docker

@@ -36,8 +36,11 @@
 
 # To install docker-ce, we need container-selinux available from an extras repo.
 # The repository name depends of the environment (AWS RHEL AMI has a specific naming).
-- name: "Find extra repos"
-  shell: "set -o pipefail; yum repolist all | egrep -e '^rhui-REGION-rhel-server-extras' -e '^rhel-7-server-extras-rpms' | cut -d'/' -f1"
+- name: 'Find extra repos'
+  shell:
+    cmd: |
+      set -o pipefail;
+      yum repolist all | egrep -e '^[!*]?rhui-REGION-rhel-server-extras' -e '^[!*]?rhel-7-server-extras-rpms' | sed -r 's#^[!*]?([^/]*)/.*#\1#'
   args:
     warn: no
   register: "redhat_extrarepo"

@@ -1,38 +1,38 @@
 ---
 
-- name: Copy Docker GPG key
+- name: 'Copy Docker GPG key'
   copy:
-    src:   docker_centos_gpg
-    dest:  /tmp/docker_centos_gpg
-    owner: root
-    group: root
+    src:   'docker_centos_gpg'
+    dest:  '/tmp/docker_centos_gpg'
+    owner: 'root'
+    group: 'root'
 
-- name: Add Docker GPG key.
+- name: 'Add Docker GPG key'
   rpm_key:
-    key:   /tmp/docker_centos_gpg
-    state: present
+    key:   '/tmp/docker_centos_gpg'
+    state: 'present'
 
-- name: Add Docker repository.
+- name: 'Add Docker repository'
   get_url:
-    url: "{{ docker_yum_repo_url }}"
-    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    url:   "{{ docker_yum_repo_url }}"
+    dest:  '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
     owner: root
     group: root
-    mode: 0644
+    mode:  0644
 
-- name: Configure Docker Edge repo.
+- name: 'Configure Docker Edge repo'
   ini_file:
-    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    dest:    '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
     section: 'docker-{{ docker_edition }}-edge'
-    option: enabled
-    value: '{{ docker_yum_repo_enable_edge }}'
+    option:  'enabled'
+    value:   '{{ docker_yum_repo_enable_edge }}'
 
-- name: Configure Docker Test repo.
+- name: 'Configure Docker Test repo'
   ini_file:
-    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    dest:    '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
     section: 'docker-{{ docker_edition }}-test'
-    option: enabled
-    value: '{{ docker_yum_repo_enable_test }}'
+    option:  'enabled'
+    value:   '{{ docker_yum_repo_enable_test }}'
 
 # To install docker-ce, we need container-selinux available from an extras repo.
 # The repository name depends of the environment (AWS RHEL AMI has a specific naming).
@@ -42,22 +42,22 @@
       set -o pipefail;
       yum repolist all | egrep -e '^[!*]?rhui-REGION-rhel-server-extras' -e '^[!*]?rhel-7-server-extras-rpms' | sed -r 's#^[!*]?([^/]*)/.*#\1#'
   args:
-    warn: no
-  register: "redhat_extrarepo"
+    warn: 'no'
+  register: 'redhat_extrarepo'
   changed_when: False
   when: ansible_distribution == "RedHat"
 
-- name: Install Docker.
+- name: 'Install Docker'
   package:
-    name: "{{ docker_package }}"
+    name:  "{{ docker_package }}"
     state: "{{ docker_package_state }}"
-  notify: restart docker
+  notify: 'restart docker'
   when: ansible_distribution != "RedHat"
 
-- name: Install Docker.
+- name: 'Install Docker'
   yum:
-    name: "{{ docker_package }}"
-    state: "{{ docker_package_state }}"
+    name:       "{{ docker_package }}"
+    state:      "{{ docker_package_state }}"
     enablerepo: "{{ redhat_extrarepo.stdout }}"
-  notify: restart docker
+  notify: 'restart docker'
   when: ansible_distribution == "RedHat"

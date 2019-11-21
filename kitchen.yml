@@ -101,4 +101,3 @@ suites:
       inspec_tests:
         - name: local
           path: test/integration/default/amazon.rb
-

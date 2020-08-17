@@ -2,7 +2,7 @@
 
 ## 0.0.3
 
-* Fix RHEL version (not anymore 7.8 beta)
+* Fix kitchen
 
 ## 0.0.2
 

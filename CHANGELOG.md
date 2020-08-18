@@ -2,7 +2,8 @@
 
 ## 0.0.3
 
-* Fix kitchen
+* fix: RHEL 7.8, match new repo name
+* fix: kitchen
 
 ## 0.0.2
 

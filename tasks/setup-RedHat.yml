@@ -27,7 +27,7 @@
     owner: root
     group: root
     mode:  0644
-  when: "{{ docker_repo_workaround }}"
+  when:  docker_repo_workaround
 
 - name: 'Configure Docker Edge repo'
   ini_file:

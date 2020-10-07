@@ -22,7 +22,7 @@
 
 - name: 'replace repo file'
   copy:
-    src: 'docker-ce.repo'
+    src: docker-ce.repo
     dest: '/etc/yum.repos.d/docker-ce.repo'
     owner: root
     group: root

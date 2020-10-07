@@ -20,3 +20,4 @@ docker_yum_repo_enable_edge: 0
 docker_yum_repo_enable_test: 0
 
 docker_users: []
+docker_repo_workaround: false

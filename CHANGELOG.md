@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.0.4
+
+* workaround: docker repo bugged for rhel
+
 ## 0.0.3
 
 * fix: RHEL 7.8, match new repo name

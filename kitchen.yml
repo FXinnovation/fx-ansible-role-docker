@@ -77,6 +77,8 @@ suites:
     provisioner:
       name: "ansible_playbook"
       playbook: "tests/test.yml"
+      extra_vars:
+        docker_repo_workaround: true
     verifier:
       inspec_tests:
         - name: local

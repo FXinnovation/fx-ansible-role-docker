@@ -19,13 +19,16 @@
     owner: root
     group: root
     mode:  0644
+  when: not rhel_docker_repo_workaround
 
-- name: 'Configure Docker Edge repo'
-  ini_file:
-    dest:    '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
-    section: 'docker-{{ docker_edition }}-edge'
-    option:  'enabled'
-    value:   '{{ docker_yum_repo_enable_edge }}'
+- name: 'replace repo file'
+  copy:
+    src: docker-ce.repo
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    owner: root
+    group: root
+    mode:  0644
+  when:  rhel_docker_repo_workaround
 
 - name: 'Configure Docker Test repo'
   ini_file:
@@ -33,6 +36,7 @@
     section: 'docker-{{ docker_edition }}-test'
     option:  'enabled'
     value:   '{{ docker_yum_repo_enable_test }}'
+  when: not rhel_docker_repo_workaround
 
 # To install docker-ce, we need container-selinux available from an extras repo.
 # The repository name depends of the environment (AWS RHEL AMI has a specific naming).

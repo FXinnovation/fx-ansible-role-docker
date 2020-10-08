@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.0.4
+
+* Fix: docker repo bugged for rhel:
+  * added extra_vars in kitchen.yml to enable workaround
+
 ## 0.0.3
 
 * fix: RHEL 7.8, match new repo name

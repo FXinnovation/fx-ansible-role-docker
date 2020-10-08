@@ -2,7 +2,7 @@
 
 ## 0.0.4
 
-* workaround: docker repo bugged for rhel:
+* Fix: docker repo bugged for rhel:
   * added extra_vars in kitchen.yml to enable workaround
 
 ## 0.0.3

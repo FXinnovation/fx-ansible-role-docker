@@ -21,7 +21,7 @@ gpgkey=https://download.docker.com/linux/centos/gpg
 
 [docker-ce-test]
 name=Docker CE Test - $basearch
-baseurl=https://download.docker.com/linux/centos/$releasever/$basearch/test
+baseurl=https://download.docker.com/linux/centos/7/$basearch/test
 enabled=0
 gpgcheck=1
 gpgkey=https://download.docker.com/linux/centos/gpg

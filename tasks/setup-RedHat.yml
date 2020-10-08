@@ -30,14 +30,6 @@
     mode:  0644
   when:  docker_repo_workaround
 
-- name: 'Configure Docker Edge repo'
-  ini_file:
-    dest:    '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
-    section: 'docker-{{ docker_edition }}-edge'
-    option:  'enabled'
-    value:   '{{ docker_yum_repo_enable_edge }}'
-  when: not docker_repo_workaround
-
 - name: 'Configure Docker Test repo'
   ini_file:
     dest:    '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'

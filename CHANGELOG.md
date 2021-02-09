@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.0.5
+
+* chore: bump pre-commit hooks
+
 ## 0.0.4
 
 * Fix: docker repo bugged for rhel:
